@@ -1,19 +1,12 @@
 package es.cic.grupo1.Servejerc12.Controller;
 
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 import org.springframework.http.HttpStatus;
 import es.cic.grupo1.Servejerc12.Model.Coche;
+import jakarta.annotation.PostConstruct;
 
 @RestController
 @RequestMapping("/coches")
@@ -21,6 +14,13 @@ public class CocheController {
 
     private static List<Coche> Coches = new ArrayList<>();
     private static AtomicLong idCounter = new AtomicLong();
+
+    @PostConstruct
+    public void init() {
+        Coches.add(new Coche(idCounter.incrementAndGet(), "Toyota", "Corolla", 2020));
+        Coches.add(new Coche(idCounter.incrementAndGet(), "Honda", "Civic", 2019));
+        Coches.add(new Coche(idCounter.incrementAndGet(), "Ford", "Focus", 2018));
+    }
 
     @GetMapping
     public List<Coche> getAllCars() {
@@ -46,7 +46,6 @@ public class CocheController {
             Coche.setMake(updatedCar.getMake());
             Coche.setModel(updatedCar.getModel());
             Coche.setYear(updatedCar.getYear());
-            
         }
         return Coche;
     }
@@ -56,4 +55,3 @@ public class CocheController {
         Coches.removeIf(Coche -> Coche.getId().equals(id));
     }
 }
-
