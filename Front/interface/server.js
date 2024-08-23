@@ -6,19 +6,16 @@ const app = express();
 // Configuración básica de CORS
 app.use(cors());
 
-// Configuración avanzada de CORS (opcional)
-const corsOptions = {
-  origin: 'http://example.com', // Reemplaza con el origen permitido
-  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-  credentials: true,
-  optionsSuccessStatus: 204
-};
+// Datos de ejemplo de coches
+const cars = [
+  { id: 1, make: 'Toyota', model: 'Corolla', year: 2020 },
+  { id: 2, make: 'Honda', model: 'Civic', year: 2019 },
+  { id: 3, make: 'Ford', model: 'Focus', year: 2018 }
+];
 
-app.use(cors(corsOptions));
-
-// Rutas y lógica de tu servidor
-app.get('/', (req, res) => {
-  res.send('Hello World!');
+// Ruta para obtener datos de coches
+app.get('/api/cars', (req, res) => {
+  res.json(cars);
 });
 
 const PORT = process.env.PORT || 3000;

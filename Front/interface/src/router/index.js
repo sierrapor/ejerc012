@@ -1,10 +1,12 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import HomeView from '../views/HomeView.vue';
 import AboutView from '../views/AboutView.vue';
+import DataTable from '../components/DataTable.vue';
+import DetailTable from '../components/DetailTable.vue';
 
 const routes = [
   {
-    path: '/',
+    path: '/home',
     name: 'Home',
     component: HomeView
   },
@@ -12,7 +14,10 @@ const routes = [
     path: '/about',
     name: 'About',
     component: AboutView
-  }
+  },
+  { path: '/', redirect: '/data' },
+  { path: '/data', name: 'DataTable', component: DataTable },
+  { path: '/details', name: 'DetailTable', component: DetailTable }
 ];
 
 const router = createRouter({
