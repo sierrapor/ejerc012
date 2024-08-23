@@ -6,6 +6,13 @@ public class  Coche {
     private String model;
     private int year;
 
+    public Coche(Long id, String make, String model, int year) {
+        this.id = id;
+        this.make = make;
+        this.model = model;
+        this.year = year;
+    }
+
     // Getters and Setters
     public Long getId() {
         return id;

@@ -13,7 +13,7 @@
   
   const fetchData = async () => {
     try {
-      const response = await solicitudHttp.get('/data');
+      const response = await solicitudHttp.get('/{id}');
       data.value = response.data;
     } catch (error) {
       console.error('Error realizando la solicitud:', error);

@@ -20,6 +20,12 @@ import es.cic.grupo1.Servejerc12.Model.Coche;
 public class CocheController {
 
     private static List<Coche> Coches = new ArrayList<>();
+    static {
+        Coches.add(new Coche(1L, "Ford", "Focus", 2010));
+        Coches.add(new Coche(2L, "Toyota", "Corolla", 2015)); // Añadido manualmente
+    }
+
+
     private static AtomicLong idCounter = new AtomicLong();
 
     @GetMapping
