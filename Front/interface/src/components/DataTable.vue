@@ -5,13 +5,17 @@
         <thead>
           <tr>
             <th>ID</th>
-            <th>Name</th>
+            <th>Make</th>
+            <th>Model</th>
+            <th>Year</th>
           </tr>
         </thead>
         <tbody>
-          <tr v-for="item in data" :key="item.id">
-            <td>{{ item.id }}</td>
-            <td>{{ item.name }}</td>
+          <tr v-for="car in cars" :key="car.id">
+            <td>{{ car.id }}</td>
+            <td>{{ car.make }}</td>
+            <td>{{ car.model }}</td>
+            <td>{{ car.year }}</td>
           </tr>
         </tbody>
       </table>
@@ -21,11 +25,11 @@
   <script setup>
   import { ref, onMounted } from 'vue';
   
-  const data = ref([]);
+  const cars = ref([]);
   
   onMounted(async () => {
-    const response = await fetch('http://localhost:3000/api/data');
-    data.value = await response.json();
+    const response = await fetch('http://localhost:8080/coches');
+    cars.value = await response.json();
   });
   </script>
   
