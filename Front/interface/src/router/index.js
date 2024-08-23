@@ -3,9 +3,8 @@ import DataTable from '../components/DataTable.vue';
 import DetailTable from '../components/DetailTable.vue';
 
 const routes = [
-  { path: '/', redirect: '/data' },
-  { path: '/data', name: 'DataTable', component: DataTable },
-  { path: '/details', name: 'DetailTable', component: DetailTable }
+  { path: '/data', name: 'data', component: DataTable },
+  { path: '/details', name: 'details', component: DetailTable }
 ];
 
 const router = createRouter({
