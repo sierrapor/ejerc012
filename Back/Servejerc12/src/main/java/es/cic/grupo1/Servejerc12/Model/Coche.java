@@ -1,12 +1,22 @@
 package es.cic.grupo1.Servejerc12.Model;
 
-public class  Coche {
+public class Coche {
     private Long id;
     private String make;
     private String model;
     private int year;
 
-    // Getters and Setters
+    public Coche() {
+    }
+
+    public Coche(Long id, String make, String model, int year) {
+        this.id = id;
+        this.make = make;
+        this.model = model;
+        this.year = year;
+    }
+
+    // Getters and setters
     public Long getId() {
         return id;
     }
