@@ -21,7 +21,7 @@
         </tr>
       </tbody>
     </table>
-    <button @click="updateSelectedCars">Update Selected Cars</button>
+    <button @click="updateSelectedCars">Actualizar autos seleccionados</button>
   </div>
 </template>
 
