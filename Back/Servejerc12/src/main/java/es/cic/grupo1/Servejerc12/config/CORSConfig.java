@@ -14,8 +14,8 @@ public class CORSConfig {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/coches") // Permitir solo la ruta /coches
-                        .allowedOrigins("http://localhost:5173", "http://localhost:4173") // Permitir estos orígenes
-                        .allowedMethods("GET", "POST") // Permitir solo estos métodos HTTP
+                        .allowedOrigins("http://localhost:5173", "http://localhost:4173") // Permitir estos orígenes(4173 es para el test de Cipress)
+                        .allowedMethods("GET") // Permitir solo este método HTTP
                         .allowedHeaders("Content-Type", "Authorization"); // Permitir solo estos encabezados
             }
         };
