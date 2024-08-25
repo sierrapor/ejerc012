@@ -13,7 +13,10 @@ public class CORSConfig {
         return new WebMvcConfigurer() {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
-                registry.addMapping("/**").allowedOrigins("http://localhost:5173");
+                registry.addMapping("/coches") // Permitir solo la ruta /coches
+                        .allowedOrigins("http://localhost:5173", "http://localhost:4173") // Permitir estos orígenes
+                        .allowedMethods("GET", "POST") // Permitir solo estos métodos HTTP
+                        .allowedHeaders("Content-Type", "Authorization"); // Permitir solo estos encabezados
             }
         };
     }
