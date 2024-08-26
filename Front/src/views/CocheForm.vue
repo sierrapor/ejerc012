@@ -37,7 +37,7 @@ const submitForm = async () => {
 };
 
 const cancel = () => {
-    router.push('/');
+    router.push('/coches');
 };
 </script>
 
