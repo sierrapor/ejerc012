@@ -28,7 +28,7 @@ public class CocheControllerTest {
 
     @Test
     public void testGetAllCoches() throws Exception {
-        mockMvc.perform(get("/coches"))
+        mockMvc.perform(get("/api/coches"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andDo(print());
@@ -36,7 +36,7 @@ public class CocheControllerTest {
 
     @Test
     public void testGetCocheById() throws Exception {
-        mockMvc.perform(get("/coches/1"))
+        mockMvc.perform(get("/api/coches/1"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andDo(print());
@@ -49,7 +49,7 @@ public class CocheControllerTest {
         coche.setModel("Corolla");
         coche.setYear(2020);
 
-        mockMvc.perform(post("/coches")
+        mockMvc.perform(post("/api/coches")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(coche)))
                 .andExpect(status().isCreated())
@@ -64,7 +64,7 @@ public class CocheControllerTest {
         coche.setModel("Civic");
         coche.setYear(2021);
         
-        mockMvc.perform(put("/coches/1")
+        mockMvc.perform(put("/api/coches/1")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(coche)))
                 .andExpect(status().isOk())
@@ -73,7 +73,7 @@ public class CocheControllerTest {
 
     @Test
     public void testDeleteCoche() throws Exception {
-        mockMvc.perform(delete("/coches/1"))
+        mockMvc.perform(delete("/api/coches/1"))
                 .andExpect(status().isOk())
                 .andDo(print());
     }
