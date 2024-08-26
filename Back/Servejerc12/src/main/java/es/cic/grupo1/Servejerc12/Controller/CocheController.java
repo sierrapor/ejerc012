@@ -6,24 +6,21 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 import org.springframework.http.HttpStatus;
 import es.cic.grupo1.Servejerc12.Model.Coche;
-import jakarta.annotation.PostConstruct;
 
 @RestController
-@RequestMapping("/coches")
+@RequestMapping("/api/coches")
 public class CocheController {
 
-    private static List<Coche> Coches = new ArrayList<>();
-    private static AtomicLong idCounter = new AtomicLong();
+    private List<Coche> Coches = new ArrayList<>();
+    private AtomicLong idCounter = new AtomicLong();
 
-    @PostConstruct
-    public void init() {
-        Coches.add(new Coche(idCounter.incrementAndGet(), "Toyota", "Corolla", 2020));
-        Coches.add(new Coche(idCounter.incrementAndGet(), "Honda", "Civic", 2019));
-        Coches.add(new Coche(idCounter.incrementAndGet(), "Ford", "Focus", 2018));
-    }
+
 
     @GetMapping
     public List<Coche> getAllCars() {
+        Coches.add(new Coche(idCounter.incrementAndGet(), "Toyota", "Corolla", 2020));
+        Coches.add(new Coche(idCounter.incrementAndGet(), "Honda", "Civic", 2019));
+        Coches.add(new Coche(idCounter.incrementAndGet(), "Ford", "Focus", 2018));
         return Coches;
     }
 
