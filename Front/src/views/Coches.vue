@@ -1,23 +1,42 @@
 <script setup>
 import { ref, onMounted } from 'vue';
 import axios from 'axios';
+import { useRouter } from 'vue-router';
+import CocheForm from './CocheForm.vue';
 
 const coches = ref([]);
+const router = useRouter();
 
 onMounted(async () => {
     const response = await axios.get('/api/coches');
     coches.value = response.data;
 });
+
+const createCoche = () => {
+    router.push('/coche-form');
+};
+
+const editCoche = (id) => {
+    router.push(`/coche-form/${id}`);
+};
+
+const deleteCoche = async (id) => {
+    await axios.delete(`/api/coches/${id}`);
+    const response = await axios.get('/api/coches');
+    coches.value = response.data;
+};
 </script>
 
 <template>
     <div>
+        <button @click="createCoche">Crear Coche</button>
         <table>
             <thead>
                 <tr>
                     <th>Fabricante</th>
                     <th>Modelo</th>
                     <th>Año</th>
+                    <th>Acciones</th>
                 </tr>
             </thead>
             <tbody>
@@ -25,9 +44,14 @@ onMounted(async () => {
                     <td>{{ coche.make }}</td>
                     <td>{{ coche.model }}</td>
                     <td>{{ coche.year }}</td>
+                    <td>
+                        <button @click="editCoche(coche.id)">Editar</button>
+                        <button @click="deleteCoche(coche.id)">Eliminar</button>
+                    </td>
                 </tr>
             </tbody>
         </table>
+        <CocheForm v-if="false" /> <!-- Solo para verificar la importación -->
     </div>
 </template>
 
