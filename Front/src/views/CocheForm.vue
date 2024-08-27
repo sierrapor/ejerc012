@@ -33,7 +33,7 @@ const submitForm = async () => {
         await axios.post('/api/coches', coche);
     }
 
-    router.push('/');
+    router.push('/coches');
 };
 
 const cancel = () => {
