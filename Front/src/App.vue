@@ -3,22 +3,21 @@ import { RouterLink, RouterView } from 'vue-router';
 </script>
 
 <template>
-  <main>
-    <nav>
-      
+  <div class="app-container">
+    <nav class="app-nav">
       <RouterLink active-class="active" to="/">Inicio</RouterLink>
       <RouterLink active-class="active" to="/coches">Coches</RouterLink>
-       
+      <RouterLink active-class="active" to="/fabricantes">Fabricantes</RouterLink>  
     </nav>
-    <RouterView />
-  </main>
+    <main>
+      <RouterView />
+    </main>
+  </div>
 </template>
 
 <style scoped>
 .app-container {
     padding: 20px;
-    background-color: #ffffff;
-    border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
@@ -34,10 +33,6 @@ import { RouterLink, RouterView } from 'vue-router';
     padding: 8px 16px;
     border-radius: 4px;
     transition: background-color 0.3s;
-}
-
-.app-nav a:hover {
-    background-color: #f1f1f1;
 }
 
 .active {

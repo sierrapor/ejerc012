@@ -7,6 +7,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import es.cic.grupo1.Servejerc12.Model.Coche;
+import es.cic.grupo1.Servejerc12.Model.Fabricante;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,9 +46,9 @@ public class CocheControllerTest {
     @Test
     public void testCreateCoche() throws Exception {
         Coche coche = new Coche();
-        coche.setMake("Toyota");
-        coche.setModel("Corolla");
-        coche.setYear(2020);
+        coche.setFabricante(new Fabricante(3l,"Honda",null));
+        coche.setModelo("Corolla");
+        coche.setanio(2020);
 
         mockMvc.perform(post("/api/coches")
                 .contentType(MediaType.APPLICATION_JSON)
@@ -60,9 +61,9 @@ public class CocheControllerTest {
     public void testUpdateCoche() throws Exception {
         Coche coche = new Coche();
         coche.setId(1L);
-        coche.setMake("Honda");
-        coche.setModel("Civic");
-        coche.setYear(2021);
+        coche.setFabricante(new Fabricante(3l,"Honda",null));
+        coche.setModelo("Civic");
+        coche.setanio(2021);
         
         mockMvc.perform(put("/api/coches/1")
                 .contentType(MediaType.APPLICATION_JSON)

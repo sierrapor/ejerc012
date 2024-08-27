@@ -11,44 +11,39 @@ import es.cic.grupo1.Servejerc12.Model.Coche;
 @RequestMapping("/api/coches")
 public class CocheController {
 
-    private List<Coche> Coches = new ArrayList<>();
+    private List<Coche> coches = new ArrayList<>();
     private AtomicLong idCounter = new AtomicLong();
 
-
-
     @GetMapping
-    public List<Coche> getAllCars() {
-        Coches.add(new Coche(idCounter.incrementAndGet(), "Toyota", "Corolla", 2020));
-        Coches.add(new Coche(idCounter.incrementAndGet(), "Honda", "Civic", 2019));
-        Coches.add(new Coche(idCounter.incrementAndGet(), "Ford", "Focus", 2018));
-        return Coches;
+    public List<Coche> getAllCoches() {
+        return coches;
     }
 
     @GetMapping("/{id}")
-    public Coche getCarById(@PathVariable Long id) {
-        return Coches.stream().filter(Coche -> Coche.getId().equals(id)).findFirst().orElse(null);
+    public Coche getCocheById(@PathVariable Long id) {
+        return coches.stream().filter(coche -> coche.getId().equals(id)).findFirst().orElse(null);
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public void createCar(@RequestBody Coche Coche) {
-        Coche.setId(idCounter.incrementAndGet());
-        Coches.add(Coche);
+    public void createCoche(@RequestBody Coche coche) {
+        coche.setId(idCounter.incrementAndGet());
+        coches.add(coche);
     }
 
     @PutMapping("/{id}")
-    public Coche updateCar(@PathVariable Long id, @RequestBody Coche updatedCar) {
-        Coche Coche = Coches.stream().filter(c -> c.getId().equals(id)).findFirst().orElse(null);
-        if (Coche != null) {
-            Coche.setMake(updatedCar.getMake());
-            Coche.setModel(updatedCar.getModel());
-            Coche.setYear(updatedCar.getYear());
+    public Coche updateCoche(@PathVariable Long id, @RequestBody Coche updatedCoche) {
+        Coche coche = coches.stream().filter(c -> c.getId().equals(id)).findFirst().orElse(null);
+        if (coche != null) {
+            coche.setModelo(updatedCoche.getModelo());
+            coche.setanio(updatedCoche.getanio());
+            coche.setFabricante(updatedCoche.getFabricante());
         }
-        return Coche;
+        return coche;
     }
 
     @DeleteMapping("/{id}")
-    public void deleteCar(@PathVariable Long id) {
-        Coches.removeIf(Coche -> Coche.getId().equals(id));
+    public void deleteCoche(@PathVariable Long id) {
+        coches.removeIf(coche -> coche.getId().equals(id));
     }
 }

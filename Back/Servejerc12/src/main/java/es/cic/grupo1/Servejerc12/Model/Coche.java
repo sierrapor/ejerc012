@@ -2,18 +2,18 @@ package es.cic.grupo1.Servejerc12.Model;
 
 public class Coche {
     private Long id;
-    private String make;
-    private String model;
-    private int year;
+    private String modelo;
+    private int anio;
+    private Fabricante fabricante;
 
     public Coche() {
     }
 
-    public Coche(Long id, String make, String model, int year) {
+    public Coche(Long id, String modelo, int anio, Fabricante fabricante) {
         this.id = id;
-        this.make = make;
-        this.model = model;
-        this.year = year;
+        this.modelo = modelo;
+        this.anio = anio;
+        this.fabricante = fabricante;
     }
 
     // Getters and setters
@@ -25,27 +25,27 @@ public class Coche {
         this.id = id;
     }
 
-    public String getMake() {
-        return make;
+    public String getModelo() {
+        return modelo;
     }
 
-    public void setMake(String make) {
-        this.make = make;
+    public void setModelo(String modelo) {
+        this.modelo = modelo;
     }
 
-    public String getModel() {
-        return model;
+    public int getanio() {
+        return anio;
     }
 
-    public void setModel(String model) {
-        this.model = model;
+    public void setanio(int anio) {
+        this.anio = anio;
     }
 
-    public int getYear() {
-        return year;
+    public Fabricante getFabricante() {
+        return fabricante;
     }
 
-    public void setYear(int year) {
-        this.year = year;
+    public void setFabricante(Fabricante fabricante) {
+        this.fabricante = fabricante;
     }
 }

@@ -23,5 +23,6 @@ const message = ref('¡Bienvenido a la página de los coches!');
 .inicio-container h1 {
     font-size: 24px;
     color: #333;
+    text-align: center;
 }
 </style>
