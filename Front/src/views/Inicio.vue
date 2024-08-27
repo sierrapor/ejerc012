@@ -34,7 +34,7 @@ body, html {
     padding: 20px;
     border-radius: 8px;
     text-align: center;
-    padding-bottom: 25vh;
+    padding-bottom: 45vh;
 }
 
 .inicio-container h1 {
