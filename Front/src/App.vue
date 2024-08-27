@@ -40,8 +40,18 @@ import { RouterLink, RouterView } from 'vue-router';
     background-color: #f1f1f1;
 }
 
+nav{
+  border-bottom: 1px solid black;
+  text-align: center;
+}
+
 .active {
     font-weight: bold;
     color: red;
+    margin-right: 25px;
+}
+
+.active:hover {
+    background-color: #ffe6e6;
 }
 </style>

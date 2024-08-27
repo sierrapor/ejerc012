@@ -27,7 +27,6 @@ body, html {
     align-items: center;
     height: 90vh;
     width: 60vw;
-    border-top: 1px solid black;
     box-sizing: border-box;
 }
 
