@@ -18,9 +18,6 @@ public class CocheController {
 
     @GetMapping
     public List<Coche> getAllCars() {
-        Coches.add(new Coche(idCounter.incrementAndGet(), "Toyota", "Corolla", 2020));
-        Coches.add(new Coche(idCounter.incrementAndGet(), "Honda", "Civic", 2019));
-        Coches.add(new Coche(idCounter.incrementAndGet(), "Ford", "Focus", 2018));
         return Coches;
     }
 
