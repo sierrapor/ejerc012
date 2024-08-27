@@ -54,4 +54,27 @@ nav{
 .active:hover {
     background-color: #ffe6e6;
 }
+
+@media (max-width: 768px) {
+    .app-nav {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .app-nav a {
+        padding: 10px;
+        font-size: 18px;
+    }
+
+    .active {
+        margin-right: 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .app-nav a {
+        padding: 8px;
+        font-size: 16px;
+    }
+}
 </style>
