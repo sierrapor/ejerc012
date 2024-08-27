@@ -28,39 +28,58 @@ const deleteCoche = async (id) => {
 </script>
 
 <template>
-    <div>
-        <button @click="createCoche">Crear Coche</button>
-        <table>
-            <thead>
-                <tr>
-                    <th>Fabricante</th>
-                    <th>Modelo</th>
-                    <th>Año</th>
-                    <th>Acciones</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr v-for="coche in coches" :key="coche.id">
-                    <td>{{ coche.make }}</td>
-                    <td>{{ coche.model }}</td>
-                    <td>{{ coche.year }}</td>
-                    <td>
-                        <button @click="editCoche(coche.id)">Editar</button>
-                        <button @click="deleteCoche(coche.id)">Eliminar</button>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <CocheForm v-if="false" /> <!-- Solo para verificar la importación -->
+    <div class="main-container">
+        <div class="coches-container">
+            <button @click="createCoche">Crear Coche</button>
+            <table class="coches-table">
+                <thead>
+                    <tr>
+                        <th>Fabricante</th>
+                        <th>Modelo</th>
+                        <th>Año</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="coche in coches" :key="coche.id">
+                        <td>{{ coche.make }}</td>
+                        <td>{{ coche.model }}</td>
+                        <td>{{ coche.year }}</td>
+                        <td>
+                            <button @click="editCoche(coche.id)">Editar</button>
+                            <button @click="deleteCoche(coche.id)">Eliminar</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <CocheForm v-if="false" /> <!-- Solo para verificar la importación -->
+        </div>
     </div>
 </template>
 
 <style scoped>
+body, html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.main-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 90vh;
+    width: 60vw;
+    box-sizing: border-box;
+}
+
 .coches-container {
     padding: 20px;
     background-color: #f9f9f9;
     border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    padding-bottom: 55vh;
 }
 
 .coches-table {
@@ -86,5 +105,62 @@ const deleteCoche = async (id) => {
 
 .coches-table tr:hover {
     background-color: #f1f1f1;
+}
+
+button {
+    padding: 8px 16px;
+    margin: 5px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+/* Media queries para hacer la página responsiva */
+@media (max-width: 768px) {
+    .main-container {
+        width: 80vw;
+        height: auto;
+    }
+
+    .coches-container {
+        padding: 15px;
+        padding-bottom: 55vh;
+    }
+
+    .coches-table th, .coches-table td {
+        padding: 10px;
+    }
+
+    button {
+        padding: 10px;
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    .main-container {
+        width: 90vw;
+        height: auto;
+    }
+
+    .coches-container {
+        padding: 10px;
+        padding-bottom: 10vh;
+    }
+
+    .coches-table th, .coches-table td {
+        padding: 8px;
+    }
+
+    button {
+        padding: 8px;
+        font-size: 12px;
+    }
 }
 </style>
