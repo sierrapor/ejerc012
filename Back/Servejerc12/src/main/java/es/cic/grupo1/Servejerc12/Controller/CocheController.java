@@ -22,7 +22,6 @@ public class CocheController {
 
     @GetMapping
     public List<Coche> getAllCars() {
-
         return Coches;
     }
 

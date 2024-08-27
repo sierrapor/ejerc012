@@ -1,64 +1,36 @@
 <script setup>
 import { ref, onMounted } from 'vue';
 import axios from 'axios';
+import { useRouter } from 'vue-router';
+import CocheForm from './CocheForm.vue';
 
 const coches = ref([]);
-const selectedCoche = ref(null);
-const showModal = ref(false);
-const isEditing = ref(false);
-const newCoche = ref({
-    make: '',
-    model: '',
-    year: ''
-});
+const router = useRouter();
 
 onMounted(async () => {
     const response = await axios.get('/api/coches');
     coches.value = response.data;
 });
 
-const openModal = (coche = null) => {
-    if (coche) {
-        selectedCoche.value = { ...coche };
-        isEditing.value = true;
-    } else {
-        selectedCoche.value = null;
-        isEditing.value = false;
-    }
-    showModal.value = true;
+const createCoche = () => {
+    router.push('/coche-form');
 };
 
-const closeModal = () => {
-    showModal.value = false;
-    selectedCoche.value = null;
-    isEditing.value = false;
+const editCoche = (id) => {
+    router.push(`/coche-form/${id}`);
 };
 
-const saveCoche = async () => {
-    if (isEditing.value) {
-        await axios.put(`/api/coches/${selectedCoche.value.id}`, selectedCoche.value);
-        const index = coches.value.findIndex(c => c.id === selectedCoche.value.id);
-        if (index !== -1) {
-            coches.value.splice(index, 1, selectedCoche.value);
-        }
-    } else {
-        const response = await axios.post('/api/coches', newCoche.value);
-        coches.value.push(response.data);
-        newCoche.value = { make: '', model: '', year: '' };
-    }
-    closeModal();
-};
-
-const deleteCoche = async (coche) => {
-    await axios.delete(`/api/coches/${coche.id}`);
-    coches.value = coches.value.filter(c => c.id !== coche.id);
+const deleteCoche = async (id) => {
+    await axios.delete(`/api/coches/${id}`);
+    const response = await axios.get('/api/coches');
+    coches.value = response.data;
 };
 </script>
 
 <template>
-    <div class="coches-container">
-        <button @click="openModal">Agregar Coche</button>
-        <table class="coches-table">
+    <div>
+        <button @click="createCoche">Crear Coche</button>
+        <table>
             <thead>
                 <tr>
                     <th>Fabricante</th>
@@ -73,36 +45,13 @@ const deleteCoche = async (coche) => {
                     <td>{{ coche.model }}</td>
                     <td>{{ coche.year }}</td>
                     <td>
-                        <button @click="openModal(coche)">Ver Detalles</button>
-                        <button @click="openModal(coche)">Editar</button>
-                        <button @click="deleteCoche(coche)">Eliminar</button>
+                        <button @click="editCoche(coche.id)">Editar</button>
+                        <button @click="deleteCoche(coche.id)">Eliminar</button>
                     </td>
                 </tr>
             </tbody>
         </table>
-
-        <div v-if="showModal" class="modal">
-            <div class="modal-content">
-                <span class="close" @click="closeModal">&times;</span>
-                <h2>{{ isEditing ? 'Editar Coche' : 'Agregar Coche' }}</h2>
-                <form @submit.prevent="saveCoche">
-                    <p>
-                        <label>Fabricante:</label>
-                        <input :value="isEditing ? selectedCoche.make : newCoche.make" @input="isEditing ? selectedCoche.make = $event.target.value : newCoche.make = $event.target.value" required>
-                    </p>
-                    <p>
-                        <label>Modelo:</label>
-                        <input :value="isEditing ? selectedCoche.model : newCoche.model" @input="isEditing ? selectedCoche.model = $event.target.value : newCoche.model = $event.target.value" required>
-                    </p>
-                    <p>
-                        <label>Año:</label>
-                        <input :value="isEditing ? selectedCoche.year : newCoche.year" @input="isEditing ? selectedCoche.year = $event.target.value : newCoche.year = $event.target.value" required>
-                    </p>
-                    <button type="submit">{{ isEditing ? 'Guardar Cambios' : 'Agregar' }}</button>
-                    <button type="button" @click="closeModal">Cancelar</button>
-                </form>
-            </div>
-        </div>
+        <CocheForm v-if="false" /> <!-- Solo para verificar la importación -->
     </div>
 </template>
 <style scoped>
