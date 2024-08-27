@@ -48,7 +48,10 @@ nav{
 .active {
     font-weight: bold;
     color: red;
-    margin-right: 25px;
+}
+
+a {
+  margin-right: 25px;
 }
 
 .active:hover {
