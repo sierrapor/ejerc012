@@ -54,26 +54,8 @@ const deleteCoche = async (id) => {
         <CocheForm v-if="false" /> <!-- Solo para verificar la importación -->
     </div>
 </template>
+
 <style scoped>
-.coches-container {
-    padding: 20px;
-    background-color: #f9f9f9;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.coches-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-}
-
-.coches-table th, .coches-table td {
-    border: 1px solid #ddd;
-    padding: 12px;
-    text-align: left;
-}
-
 .coches-table th {
     background-color: #f2f2f2;
     font-weight: bold;
@@ -125,8 +107,34 @@ button:hover {
 .close {
     position: absolute;
     top: 10px;
-    right: 10px;
-    font-size: 24px;
-    cursor: pointer;
+}
+
+/* Nuevos estilos para la tabla */
+.coches-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+.coches-table th, .coches-table td {
+    border: 1px solid black;
+    padding: 8px;
+    text-align: left;
+}
+
+.coches-table th:first-child {
+    border-top-left-radius: 8px;
+}
+
+.coches-table th:last-child {
+    border-top-right-radius: 8px;
+}
+
+.coches-table tr:last-child td:first-child {
+    border-bottom-left-radius: 8px;
+}
+
+.coches-table tr:last-child td:last-child {
+    border-bottom-right-radius: 8px;
 }
 </style>
