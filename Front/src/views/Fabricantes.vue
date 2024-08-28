@@ -8,30 +8,30 @@ const coches = ref([]);
 const router = useRouter();
 
 onMounted(async () => {
-    const response = await axios.get('/api/coches');
+    const response = await axios.get('/api/fabricantes');
     coches.value = response.data;
 });
 
-const createCoche = () => {
+const addFabricante = () => {
     router.push('/fabricante-form');
 };
 
-const editCoche = (id) => {
+const editFabricante = (id) => {
     router.push(`/fabricante-form/${id}`);
 };
 
-const deleteCoche = async (id) => {
-    await axios.delete(`/api/coches/${id}`);
-    const response = await axios.get('/api/coches');
+const deleteFabricante = async (id) => {
+    await axios.delete(`/api/fabricantes/${id}`);
+    const response = await axios.get('/api/fabricantes');
     coches.value = response.data;
 };
 </script>
 
 <template>
     <div class="main-container">
-        <div class="coches-container">
-            <button @click="createCoche">Agregar Fabricante</button>
-            <table class="coches-table">
+        <div class="fabricantes-container">
+            <button @click="addFabricante">Agregar Fabricante</button>
+            <table class="fabricantes-table">
                 <thead>
                     <tr>
                         <th>Nombre</th>
@@ -43,8 +43,8 @@ const deleteCoche = async (id) => {
                         <td>{{ coche.make }}</td>
                         <td>{{ coche.model }}</td>
                         <td>
-                            <img src="@/assets/editar.png" @click="editCoche(coche.id)" class="imagen" alt="Editar" />
-                            <img src="@/assets/eliminar.jpg" @click="deleteCoche(coche.id)" class="imagen" alt="Eliminar" />
+                            <img src="@/assets/editar.png" @click="editFabricante(coche.id)" class="imagen" alt="Editar" />
+                            <img src="@/assets/eliminar.jpg" @click="deleteFabricante(coche.id)" class="imagen" alt="Eliminar" />
                         </td>
                     </tr>
                 </tbody>
@@ -71,7 +71,7 @@ body, html {
     box-sizing: border-box;
 }
 
-.coches-container {
+.fabricantes-container {
     padding: 20px;
     background-color: #f9f9f9;
     border-radius: 8px;
@@ -79,28 +79,28 @@ body, html {
     padding-bottom: 45vh;
 }
 
-.coches-table {
+.fabricantes-table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 20px;
 }
 
-.coches-table th, .coches-table td {
+.fabricantes-table th, .fabricantes-table td {
     border: 1px solid #ddd;
     padding: 12px;
     text-align: left;
 }
 
-.coches-table th {
+.fabricantes-table th {
     background-color: #f2f2f2;
     font-weight: bold;
 }
 
-.coches-table tr:nth-child(even) {
+.fabricantes-table tr:nth-child(even) {
     background-color: #f9f9f9;
 }
 
-.coches-table tr:hover {
+.fabricantes-table tr:hover {
     background-color: #f1f1f1;
 }
 
@@ -135,12 +135,12 @@ button:hover {
         height: auto;
     }
 
-    .coches-container {
+    .fabricantes-container {
         padding: 15px;
         padding-bottom: 55vh;
     }
 
-    .coches-table th, .coches-table td {
+    .fabricantes-table th, .fabricantes-table td {
         padding: 10px;
     }
 
@@ -156,12 +156,12 @@ button:hover {
         height: auto;
     }
 
-    .coches-container {
+    .fabricantes-container {
         padding: 10px;
         padding-bottom: 10vh;
     }
 
-    .coches-table th, .coches-table td {
+    .fabricantes-table th, .fabricantes-table td {
         padding: 8px;
     }
 

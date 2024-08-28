@@ -12,7 +12,7 @@ onMounted(async () => {
     coches.value = response.data;
 });
 
-const createCoche = () => {
+const addCoche = () => {
     router.push('/coche-form');
 };
 
@@ -30,7 +30,7 @@ const deleteCoche = async (id) => {
 <template>
     <div class="main-container">
         <div class="coches-container">
-            <button @click="createCoche">Agregar Coche</button>
+            <button @click="addCoche">Agregar Coche</button>
             <table class="coches-table">
                 <thead>
                     <tr>

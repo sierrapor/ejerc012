@@ -13,7 +13,7 @@ const id = ref(null);
 
 if (route.params.id) {
     id.value = route.params.id;
-    axios.get(`/api/coches/${id.value}`).then(response => {
+    axios.get(`/api/fabricantes/${id.value}`).then(response => {
         make.value = response.data.make;
         model.value = response.data.model;
         year.value = response.data.year;
