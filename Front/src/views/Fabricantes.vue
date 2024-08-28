@@ -43,7 +43,7 @@ const deleteCoche = async (id) => {
                         <td>{{ coche.make }}</td>
                         <td>{{ coche.model }}</td>
                         <td>
-                            <img src="@/assets/editar.png" @click="deleteCoche(coche.id)" class="imagen" alt="Editar" />
+                            <img src="@/assets/editar.png" @click="editCoche(coche.id)" class="imagen" alt="Editar" />
                             <img src="@/assets/eliminar.jpg" @click="deleteCoche(coche.id)" class="imagen" alt="Eliminar" />
                         </td>
                     </tr>
