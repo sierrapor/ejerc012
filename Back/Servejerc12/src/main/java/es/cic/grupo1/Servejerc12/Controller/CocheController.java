@@ -13,8 +13,12 @@ public class CocheController {
 
     private List<Coche> Coches = new ArrayList<>();
     private AtomicLong idCounter = new AtomicLong();
-
-
+    
+    public CocheController() {
+        Coches.add(new Coche(idCounter.incrementAndGet(), "Ford", "Focus", 2010));
+        Coches.add(new Coche(idCounter.incrementAndGet(), "Renault", "Clio", 2015));
+        Coches.add(new Coche(idCounter.incrementAndGet(), "Seat", "Ibiza", 2018));
+    }
 
     @GetMapping
     public List<Coche> getAllCars() {

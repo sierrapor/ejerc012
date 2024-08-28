@@ -79,7 +79,7 @@ body, html {
     background-color: #f9f9f9;
     border-radius: 8px;
     text-align: center;
-    padding-bottom: 55vh;
+    padding-bottom: 45vh;
 }
 
 .coches-table {
@@ -121,7 +121,6 @@ button:hover {
     background-color: #0056b3;
 }
 
-/* Media queries para hacer la página responsiva */
 @media (max-width: 768px) {
     .main-container {
         width: 80vw;
