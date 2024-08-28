@@ -28,35 +28,31 @@ const submitForm = async () => {
     };
 
     if (id.value) {
-        await axios.put(`/api/coches/${id.value}`, coche);
+        await axios.put(`/api/fabricantes/${id.value}`, coche);
     } else {
-        await axios.post('/api/coches', coche);
+        await axios.post('/api/fabricantes', coche);
     }
 
-    router.push('/coches');
+    router.push('/fabricantes');
 };
 
 const cancel = () => {
-    router.push('/coches');
+    router.push('/fabricantes');
 };
 </script>
 
 <template>
     <div class="main-container">
         <div class="form-container">
-            <h1>{{ id ? 'Modificar Coche' : 'Agregar Coche' }}</h1>
+            <h1>{{ id ? 'Modificar Fabricante' : 'Agregar Fabricante' }}</h1>
             <form @submit.prevent="submitForm">
                 <div>
-                    <label for="make">Fabricante:</label>
+                    <label for="make">Nombre:</label>
                     <input id="make" v-model="make" required />
                 </div>
                 <div>
-                    <label for="model">Modelo:</label>
+                    <label for="model">Coches:</label>
                     <input id="model" v-model="model" required />
-                </div>
-                <div>
-                    <label for="year">Año:</label>
-                    <input id="year" v-model="year" required type="number" />
                 </div>
                 <button type="submit">{{ id ? 'Modificar' : 'Agregar' }}</button>
                 <button type="button" @click="cancel">Cancelar</button>

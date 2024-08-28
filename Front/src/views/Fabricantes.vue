@@ -2,7 +2,7 @@
 import { ref, onMounted } from 'vue';
 import axios from 'axios';
 import { useRouter } from 'vue-router';
-import CocheForm from './CocheForm.vue';
+import FabricanteForm from './FabricanteForm.vue';
 
 const coches = ref([]);
 const router = useRouter();
@@ -13,11 +13,11 @@ onMounted(async () => {
 });
 
 const createCoche = () => {
-    router.push('/coche-form');
+    router.push('/fabricante-form');
 };
 
 const editCoche = (id) => {
-    router.push(`/coche-form/${id}`);
+    router.push(`/fabricante-form/${id}`);
 };
 
 const deleteCoche = async (id) => {
@@ -30,21 +30,18 @@ const deleteCoche = async (id) => {
 <template>
     <div class="main-container">
         <div class="coches-container">
-            <button @click="createCoche">Agregar Coche</button>
+            <button @click="createCoche">Agregar Fabricante</button>
             <table class="coches-table">
                 <thead>
                     <tr>
-                        <th>Fabricante</th>
-                        <th>Modelo</th>
-                        <th>Año</th>
-                        <th>Acciones</th>
+                        <th>Nombre</th>
+                        <th>Coches</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr v-for="coche in coches" :key="coche.id">
                         <td>{{ coche.make }}</td>
                         <td>{{ coche.model }}</td>
-                        <td>{{ coche.year }}</td>
                         <td>
                             <img src="@/assets/editar.png" @click="deleteCoche(coche.id)" class="imagen" alt="Editar" />
                             <img src="@/assets/eliminar.jpg" @click="deleteCoche(coche.id)" class="imagen" alt="Eliminar" />
@@ -52,7 +49,7 @@ const deleteCoche = async (id) => {
                     </tr>
                 </tbody>
             </table>
-            <CocheForm v-if="false" /> <!-- Solo para verificar la importación -->
+            <FabricanteForm v-if="false" /> <!-- Solo para verificar la importación -->
         </div>
     </div>
 </template>
