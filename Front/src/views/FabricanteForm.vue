@@ -6,34 +6,30 @@ import { useRoute, useRouter } from 'vue-router';
 const route = useRoute();
 const router = useRouter();
 
-const make = ref('');
-const model = ref('');
-const year = ref('');
-const id = ref(null);
+const nombre = ref('');
+const coches = ref([]);
+const id = ref(route.params.id ? Number(route.params.id) : null);
 
-if (route.params.id) {
-    id.value = route.params.id;
-    axios.get(`/api/fabricantes/${id.value}`).then(response => {
-        make.value = response.data.make;
-        model.value = response.data.model;
-        year.value = response.data.year;
+if (id.value) {
+    axios.get(`/api/makes/${id.value}`).then(response => {
+        nombre.value = response.data.nombre;
+        coches.value = response.data.coches;
+    }).catch(error => {
+        console.error('Error fetching fabricante:', error);
     });
 }
 
 const submitForm = async () => {
-    const coche = {
-        make: make.value,
-        model: model.value,
-        year: year.value
+    const fabricante = {
+        nombre: nombre.value,
+        coches: coches.value
     };
-
-    if (id.value) {
-        await axios.put(`/api/fabricantes/${id.value}`, coche);
-    } else {
-        await axios.post('/api/fabricantes', coche);
-    }
-
-    router.push('/fabricantes');
+        if (id.value) {
+            await axios.put(`/api/makes/${id.value}`, fabricante);
+        } else {
+            await axios.post('/api/makes', fabricante);
+        }
+        router.push('/fabricantes');
 };
 
 const cancel = () => {
@@ -47,12 +43,12 @@ const cancel = () => {
             <h1>{{ id ? 'Modificar Fabricante' : 'Agregar Fabricante' }}</h1>
             <form @submit.prevent="submitForm">
                 <div>
-                    <label for="make">Nombre:</label>
-                    <input id="make" v-model="make" required />
+                    <label for="nombre">Nombre:</label>
+                    <input id="nombre" v-model="nombre" required />
                 </div>
                 <div>
-                    <label for="model">Coches:</label>
-                    <input id="model" v-model="model" required />
+                    <label for="coches">Coches:</label>
+                    <input id="coches" v-model="coches" />
                 </div>
                 <button type="submit">{{ id ? 'Modificar' : 'Agregar' }}</button>
                 <button type="button" @click="cancel">Cancelar</button>

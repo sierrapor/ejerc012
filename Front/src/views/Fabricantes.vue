@@ -4,12 +4,12 @@ import axios from 'axios';
 import { useRouter } from 'vue-router';
 import FabricanteForm from './FabricanteForm.vue';
 
-const coches = ref([]);
+const fabricantes = ref([]);
 const router = useRouter();
 
 onMounted(async () => {
-    const response = await axios.get('/api/fabricantes');
-    coches.value = response.data;
+    const response = await axios.get('/api/makes');
+    fabricantes.value = response.data;
 });
 
 const addFabricante = () => {
@@ -21,9 +21,9 @@ const editFabricante = (id) => {
 };
 
 const deleteFabricante = async (id) => {
-    await axios.delete(`/api/fabricantes/${id}`);
-    const response = await axios.get('/api/fabricantes');
-    coches.value = response.data;
+    await axios.delete(`/api/makes/${id}`);
+    const response = await axios.get('/api/makes');
+    fabricantes.value = response.data;
 };
 </script>
 
@@ -40,13 +40,13 @@ const deleteFabricante = async (id) => {
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="coche in coches" :key="coche.id">
-                        <td>{{ coche.make }}</td>
-                        <td>{{ coche.model }}</td>
+                    <tr v-for="fabricante in fabricantes" :key="fabricante.id">
+                        <td>{{ fabricante.nombre }}</td>
+                        <td>{{ fabricante.coches.length }}</td>
                         <td>
-                            <img src="@/assets/editar.png" @click="editFabricante(coche.id)" class="imagen" alt="Editar" />
-                            <img src="@/assets/eliminar.jpg" @click="deleteFabricante(coche.id)" class="imagen" alt="Eliminar" />
-                            <router-link :to="{ name: 'FabricanteDetalle', params: { id: coche.id } }">
+                            <img src="@/assets/editar.png" @click="editFabricante(fabricante.id)" class="imagen" alt="Editar" />
+                            <img src="@/assets/eliminar.jpg" @click="deleteFabricante(fabricante.id)" class="imagen" alt="Eliminar" />
+                            <router-link :to="{ name: 'FabricanteDetalle', params: { id: fabricante.id } }">
                                 <img src="@/assets/detalles.png" class="imagen" alt="Ver Detalles" />
                             </router-link>
                         </td>
@@ -80,7 +80,8 @@ body, html {
     background-color: #f9f9f9;
     border-radius: 8px;
     text-align: center;
-    padding-bottom: 45vh;
+    height: 80vh; /* Altura fija */
+    overflow-y: auto; /* Permitir desplazamiento vertical */
 }
 
 .fabricantes-table {
@@ -141,7 +142,7 @@ button:hover {
 
     .fabricantes-container {
         padding: 15px;
-        padding-bottom: 55vh;
+        height: 70vh; /* Ajustar altura para pantallas más pequeñas */
     }
 
     .fabricantes-table th, .fabricantes-table td {
@@ -162,7 +163,7 @@ button:hover {
 
     .fabricantes-container {
         padding: 10px;
-        padding-bottom: 10vh;
+        height: 60vh; /* Ajustar altura para pantallas más pequeñas */
     }
 
     .fabricantes-table th, .fabricantes-table td {

@@ -1,34 +1,34 @@
 <template>
-    <div class="main-container">
+  <div class="main-container">
       <div class="detalle-container">
-        <h1>Detalles del Fabricante</h1>
-        <div v-if="fabricante">
-          <p><strong>Nombre:</strong> {{ fabricante.name }}</p>
-          <p><strong>País:</strong> {{ fabricante.country }}</p>
-        </div>
-        <button @click="volver">Volver</button>
+          <h1>Detalles del Fabricante</h1>
+          <div v-if="fabricante">
+              <p><strong>Nombre:</strong> {{ fabricante.nombre }}</p>
+              <p><strong>Coches:</strong> {{ fabricante.coches.length }}</p>
+          </div>
+          <button @click="volver">Volver</button>
       </div>
-    </div>
-  </template>
-  
-  <script setup>
-  import { ref, onMounted } from 'vue';
-  import { useRoute, useRouter } from 'vue-router';
-  import axios from 'axios';
-  
-  const route = useRoute();
-  const router = useRouter();
-  const fabricante = ref(null);
-  
-  onMounted(async () => {
-    const response = await axios.get(`/api/fabricantes/${route.params.id}`);
-    fabricante.value = response.data;
-  });
-  
-  const volver = () => {
-    router.push('/fabricantes');
-  };
-  </script>
+  </div>
+</template>
+
+<script setup>
+import { ref, onMounted } from 'vue';
+import { useRoute, useRouter } from 'vue-router';
+import axios from 'axios';
+
+const route = useRoute();
+const router = useRouter();
+const fabricante = ref(null);
+
+onMounted(async () => {
+  const response = await axios.get(`/api/makes/${route.params.id}`);
+  fabricante.value = response.data;
+});
+
+const volver = () => {
+  router.push('/fabricantes');
+};
+</script>
   
   <style scoped>
   body, html {

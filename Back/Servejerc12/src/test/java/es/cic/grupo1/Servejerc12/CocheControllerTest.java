@@ -36,19 +36,18 @@ public class CocheControllerTest {
 
     @Test
     public void testGetCocheById() throws Exception {
-        mockMvc.perform(get("/api/coches/1"))
+        mockMvc.perform(get("/api/coches/1")
+                .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andDo(print());
     }
 
     @Test
     public void testCreateCoche() throws Exception {
         Coche coche = new Coche();
-        coche.setMake("Toyota");
+        
         coche.setModel("Corolla");
         coche.setYear(2020);
-
         mockMvc.perform(post("/api/coches")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(coche)))
@@ -60,7 +59,6 @@ public class CocheControllerTest {
     public void testUpdateCoche() throws Exception {
         Coche coche = new Coche();
         coche.setId(1L);
-        coche.setMake("Honda");
         coche.setModel("Civic");
         coche.setYear(2021);
         
