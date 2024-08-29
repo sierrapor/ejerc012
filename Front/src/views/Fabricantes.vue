@@ -36,6 +36,7 @@ const deleteFabricante = async (id) => {
                     <tr>
                         <th>Nombre</th>
                         <th>Coches</th>
+                        <th>Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -45,6 +46,9 @@ const deleteFabricante = async (id) => {
                         <td>
                             <img src="@/assets/editar.png" @click="editFabricante(coche.id)" class="imagen" alt="Editar" />
                             <img src="@/assets/eliminar.jpg" @click="deleteFabricante(coche.id)" class="imagen" alt="Eliminar" />
+                            <router-link :to="{ name: 'FabricanteDetalle', params: { id: coche.id } }">
+                                <img src="@/assets/detalles.png" class="imagen" alt="Ver Detalles" />
+                            </router-link>
                         </td>
                     </tr>
                 </tbody>

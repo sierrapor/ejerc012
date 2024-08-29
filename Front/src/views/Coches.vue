@@ -29,33 +29,36 @@ const deleteCoche = async (id) => {
 
 <template>
     <div class="main-container">
-        <div class="coches-container">
-            <button @click="addCoche">Agregar Coche</button>
-            <table class="coches-table">
-                <thead>
-                    <tr>
-                        <th>Fabricante</th>
-                        <th>Modelo</th>
-                        <th>Año</th>
-                        <th>Acciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr v-for="coche in coches" :key="coche.id">
-                        <td>{{ coche.make }}</td>
-                        <td>{{ coche.model }}</td>
-                        <td>{{ coche.year }}</td>
-                        <td>
-                            <img src="@/assets/editar.png" @click="editCoche(coche.id)" class="imagen" alt="Editar" />
-                            <img src="@/assets/eliminar.jpg" @click="deleteCoche(coche.id)" class="imagen" alt="Eliminar" />
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-            <CocheForm v-if="false" /> <!-- Solo para verificar la importación -->
-        </div>
+      <div class="coches-container">
+        <button @click="addCoche">Agregar Coche</button>
+        <table class="coches-table">
+          <thead>
+            <tr>
+              <th>Fabricante</th>
+              <th>Modelo</th>
+              <th>Año</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="coche in coches" :key="coche.id">
+              <td>{{ coche.make }}</td>
+              <td>{{ coche.model }}</td>
+              <td>{{ coche.year }}</td>
+              <td>
+                <img src="@/assets/editar.png" @click="editCoche(coche.id)" class="imagen" alt="Editar" />
+                <img src="@/assets/eliminar.jpg" @click="deleteCoche(coche.id)" class="imagen" alt="Eliminar" />
+                <router-link :to="{ name: 'CocheDetalle', params: { id: coche.id } }">
+                    <img src="@/assets/detalles.png" class="imagen" alt="Ver Detalles" />
+                </router-link>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <CocheForm v-if="false" /> <!-- Solo para verificar la importación -->
+      </div>
     </div>
-</template>
+  </template>
 
 <style scoped>
 body, html {
