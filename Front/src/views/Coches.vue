@@ -55,7 +55,7 @@ const deleteCoche = async (id) => {
             </tr>
           </tbody>
         </table>
-        <CocheForm v-if="false" /> <!-- Solo para verificar la importación -->
+        <CocheForm v-if="false" /> 
       </div>
     </div>
   </template>
@@ -82,7 +82,8 @@ body, html {
     background-color: #f9f9f9;
     border-radius: 8px;
     text-align: center;
-    padding-bottom: 45vh;
+    height: 80vh; /* Altura fija */
+    overflow-y: auto; /* Permitir desplazamiento vertical */
 }
 
 .coches-table {
@@ -143,7 +144,7 @@ button:hover {
 
     .coches-container {
         padding: 15px;
-        padding-bottom: 55vh;
+        height: 70vh; /* Ajustar altura para pantallas más pequeñas */
     }
 
     .coches-table th, .coches-table td {
@@ -164,7 +165,7 @@ button:hover {
 
     .coches-container {
         padding: 10px;
-        padding-bottom: 10vh;
+        height: 60vh; /* Ajustar altura para pantallas más pequeñas */
     }
 
     .coches-table th, .coches-table td {

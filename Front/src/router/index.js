@@ -5,7 +5,7 @@ import Fabricantes from "../views/Fabricantes.vue";
 import CocheForm from '../views/CocheForm.vue';
 import FabricanteForm from '../views/FabricanteForm.vue';
 import CocheDetalle from '../views/CocheDetalle.vue';
-import FabricanteDetalle from '../views/FabricanteDetalle.vue'; // Importa el nuevo componente
+import FabricanteDetalle from '../views/FabricanteDetalle.vue';
 
 const routes = [
   {
@@ -49,7 +49,7 @@ const routes = [
     component: CocheDetalle
   },
   {
-    path: '/fabricante-detalle/:id', // Nueva ruta para el detalle del fabricante
+    path: '/fabricante-detalle/:id',
     name: 'FabricanteDetalle',
     component: FabricanteDetalle
   }
