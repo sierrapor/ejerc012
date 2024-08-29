@@ -12,23 +12,16 @@ const make = ref('');
 const model = ref('');
 const year = ref('');
 
-// TODO: Obtener lista de fabricantes y modelos del backend
-const manufacturers = ref(['Toyota', 'Ford', 'Chevrolet', 'Honda', 'Nissan']);
-const models = ref({
-    'Toyota': ['Corolla', 'Camry', 'Prius'],
-    'Ford': ['Fiesta', 'Focus', 'Mustang'],
-    'Chevrolet': ['Spark', 'Malibu', 'Impala'],
-    'Honda': ['Civic', 'Accord', 'Fit'],
-    'Nissan': ['Versa', 'Sentra', 'Altima']
-});
-const filteredManufacturers = ref([]);
+const manufacturers = ref([]);
 const filteredModels = ref([]);
 
-const filterManufacturers = () => {
-    const query = make.value.toLowerCase();
-    filteredManufacturers.value = manufacturers.value.filter(manufacturer =>
-        manufacturer.toLowerCase().includes(query)
-    );
+const fetchManufacturers = async () => {
+    try {
+        const response = await axios.get('/api/makes/names');
+        manufacturers.value = response.data;
+    } catch (error) {
+        console.error('Error fetching manufacturers:', error);
+    }
 };
 
 const filterModels = () => {
@@ -41,12 +34,6 @@ const filterModels = () => {
     } else {
         filteredModels.value = [];
     }
-};
-
-const selectManufacturer = (manufacturer) => {
-    make.value = manufacturer;
-    filteredManufacturers.value = [];
-    filterModels(); // Actualizar la lista de modelos cuando se selecciona un fabricante
 };
 
 const submitForm = async () => {
@@ -68,10 +55,11 @@ watch(make, filterModels);
 
 // Load coche data if editing
 onMounted(async () => {
+    await fetchManufacturers();
     if (id) {
         const response = await axios.get(`/api/coches/${id}`);
         const coche = response.data;
-        make.value = coche.make;
+        make.value = manufacturers.value;
         model.value = coche.model;
         year.value = coche.year;
     }
@@ -84,12 +72,11 @@ onMounted(async () => {
         <form @submit.prevent="submitForm">
             <div>
                 <label for="make">Fabricante:</label>
-                <input id="make" v-model="make" @input="filterManufacturers" list="manufacturers-list" required />
-                <datalist id="manufacturers-list">
-                    <option v-for="manufacturer in filteredManufacturers" :key="manufacturer" :value="manufacturer">
+                <select id="make" v-model="make" required>
+                    <option v-for="manufacturer in manufacturers" :key="manufacturer" :value="manufacturer">
                         {{ manufacturer }}
                     </option>
-                </datalist>
+                </select>
             </div>
             <div>
                 <label for="model">Modelo:</label>
@@ -144,7 +131,7 @@ label {
     margin-bottom: 0.5em;
 }
 
-input {
+input, select {
     width: 100%;
     padding: 0.5em;
     margin-bottom: 1em;
@@ -183,7 +170,7 @@ button[type="button"]:hover {
         padding-bottom: 15vh;
     }
 
-    input {
+    input, select {
         padding: 10px;
     }
 
@@ -204,7 +191,7 @@ button[type="button"]:hover {
         padding-bottom: 10vh;
     }
 
-    input {
+    input, select {
         padding: 8px;
     }
 
