@@ -12,7 +12,7 @@ onMounted(async () => {
     coches.value = response.data;
 });
 
-const createCoche = () => {
+const addCoche = () => {
     router.push('/coche-form');
 };
 
@@ -28,34 +28,75 @@ const deleteCoche = async (id) => {
 </script>
 
 <template>
-    <div>
-        <button @click="createCoche">Crear Coche</button>
-        <table>
-            <thead>
-                <tr>
-                    <th>Fabricante</th>
-                    <th>Modelo</th>
-                    <th>Año</th>
-                    <th>Acciones</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr v-for="coche in coches" :key="coche.id">
-                    <td>{{ coche.make }}</td>
-                    <td>{{ coche.model }}</td>
-                    <td>{{ coche.year }}</td>
-                    <td>
-                        <button @click="editCoche(coche.id)">Editar</button>
-                        <button @click="deleteCoche(coche.id)">Eliminar</button>
-                    </td>
-                </tr>
-            </tbody>
+    <div class="main-container">
+      <div class="coches-container">
+        <button @click="addCoche">Agregar Coche</button>
+        <table class="coches-table">
+          <thead>
+            <tr>
+              <th>Fabricante</th>
+              <th>Modelo</th>
+              <th>Año</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="coche in coches" :key="coche.id">
+              <td>{{ coche.make }}</td>
+              <td>{{ coche.model }}</td>
+              <td>{{ coche.year }}</td>
+              <td>
+                <img src="@/assets/editar.png" @click="editCoche(coche.id)" class="imagen" alt="Editar" />
+                <img src="@/assets/eliminar.jpg" @click="deleteCoche(coche.id)" class="imagen" alt="Eliminar" />
+                <router-link :to="{ name: 'CocheDetalle', params: { id: coche.id } }">
+                    <img src="@/assets/detalles.png" class="imagen" alt="Ver Detalles" />
+                </router-link>
+              </td>
+            </tr>
+          </tbody>
         </table>
         <CocheForm v-if="false" /> <!-- Solo para verificar la importación -->
+      </div>
     </div>
-</template>
+  </template>
 
 <style scoped>
+body, html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.main-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 90vh;
+    width: 60vw;
+    box-sizing: border-box;
+}
+
+.coches-container {
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    text-align: center;
+    padding-bottom: 45vh;
+}
+
+.coches-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.coches-table th, .coches-table td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: left;
+}
+
 .coches-table th {
     background-color: #f2f2f2;
     font-weight: bold;
@@ -71,6 +112,7 @@ const deleteCoche = async (id) => {
 
 button {
     padding: 8px 16px;
+    margin: 5px;
     background-color: #007bff;
     color: white;
     border: none;
@@ -82,59 +124,56 @@ button:hover {
     background-color: #0056b3;
 }
 
-.modal {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
+.imagen {
+    width: 26px;
+    height: 26px;
+    cursor: pointer;
+    margin: 5px;
 }
 
-.modal-content {
-    background-color: white;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    width: 300px;
-    text-align: center;
-    position: relative;
+.imagen:hover {
+    opacity: 0.7;
 }
 
-.close {
-    position: absolute;
-    top: 10px;
+@media (max-width: 768px) {
+    .main-container {
+        width: 80vw;
+        height: auto;
+    }
+
+    .coches-container {
+        padding: 15px;
+        padding-bottom: 55vh;
+    }
+
+    .coches-table th, .coches-table td {
+        padding: 10px;
+    }
+
+    button {
+        padding: 10px;
+        font-size: 14px;
+    }
 }
 
-/* Nuevos estilos para la tabla */
-.coches-table {
-    width: 100%;
-    border-collapse: separate;
-    border-spacing: 0;
-}
+@media (max-width: 480px) {
+    .main-container {
+        width: 90vw;
+        height: auto;
+    }
 
-.coches-table th, .coches-table td {
-    border: 1px solid black;
-    padding: 8px;
-    text-align: left;
-}
+    .coches-container {
+        padding: 10px;
+        padding-bottom: 10vh;
+    }
 
-.coches-table th:first-child {
-    border-top-left-radius: 8px;
-}
+    .coches-table th, .coches-table td {
+        padding: 8px;
+    }
 
-.coches-table th:last-child {
-    border-top-right-radius: 8px;
-}
-
-.coches-table tr:last-child td:first-child {
-    border-bottom-left-radius: 8px;
-}
-
-.coches-table tr:last-child td:last-child {
-    border-bottom-right-radius: 8px;
+    button {
+        padding: 8px;
+        font-size: 12px;
+    }
 }
 </style>

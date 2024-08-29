@@ -8,6 +8,7 @@ import { RouterLink, RouterView } from 'vue-router';
       
       <RouterLink active-class="active" to="/">Inicio</RouterLink>
       <RouterLink active-class="active" to="/coches">Coches</RouterLink>
+      <RouterLink active-class="active" to="/fabricantes">Fabricantes</RouterLink>
        
     </nav>
     <RouterView />
@@ -40,8 +41,44 @@ import { RouterLink, RouterView } from 'vue-router';
     background-color: #f1f1f1;
 }
 
+nav{
+  border-bottom: 1px solid black;
+  text-align: center;
+}
+
 .active {
     font-weight: bold;
     color: red;
+}
+
+a {
+  margin-right: 25px;
+}
+
+.active:hover {
+    background-color: #ffe6e6;
+}
+
+@media (max-width: 768px) {
+    .app-nav {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .app-nav a {
+        padding: 10px;
+        font-size: 18px;
+    }
+
+    .active {
+        margin-right: 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .app-nav a {
+        padding: 8px;
+        font-size: 16px;
+    }
 }
 </style>
